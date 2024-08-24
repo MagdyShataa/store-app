@@ -1,0 +1,65 @@
+<p>product-list works!</p>
+<div class="container ">
+  <div class="p-5 text-center bg-body-secondary shadow-sm   rounded-3">
+
+    <h1 class="text-body-emphasis">Jumbotron with storeApp</h1>
+    <div class="d-inline-flex gap-2">
+      <select class="form-select border-info px-5" aria-label="Category select" (change)="onCategoryChange($event)">
+        <option value="" selected>Select a Category</option>
+        <option *ngFor="let category of categories" [value]="category">
+          {{ category }}
+        </option>
+      </select>
+    </div>
+  </div>
+  <br>
+  <br>
+</div>
+
+
+
+
+
+
+
+
+
+
+<div *ngIf="errorMessage" class="alert alert-danger">
+  {{ errorMessage }}
+</div>
+<div class="album py-5 bg-body-secondary">
+  <div class="container" *ngIf="products.length > 0; else noProducts">
+
+    <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+      <div class="col    rounded-4" *ngFor="let product of products" style="height: 450px;">
+        <div class="card shadow rounded-4" style="height: 450px;">
+
+          <img [src]="product.image" alt="A description of the image." loading="lazy"
+            class="  img-fluid object-fit-cover ratio  ratio-16x9  rounded-top-3 border-0" decoding="async">
+
+          <div class="card-body bg-dark-subtle">
+            <h5 class="card-title display-5 fw-medium">{{ product.title }}</h5>
+            <p class="card-text text-success"><strong>Price:</strong> {{ product.price|currency }}</p>
+            <p class="card-text text-warning"><strong>Rating:</strong> {{ product.rating.rate }}
+              ({{ product.rating.count }} reviews)</p>
+            <div class="d-flex justify-content-between align-items-center">
+              <div class="btn-group">
+                <button type="button" [routerLink]="['/product-ditals', product.id]"
+                  class="btn  btn-outline-success fw-medium">View details</button>
+              </div>
+              <!-- <button type="button" class="btn btn-sm btn-outline-success fw-medium" (click)="addToCard()">Add to
+                Card</button> -->
+
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+<ng-template #noProducts>
+  <p>No products available.</p>
+</ng-template>
+

@@ -1,0 +1,50 @@
+<br>
+<br>
+<div class="container mt-5">
+  <div class="card mb-3 rounded-3" *ngIf="product$ | async as product; else loading">
+    <div class="row g-0" *ngIf="product; else errorTemplate">
+      <div class="col-md-5">
+        <img [src]="product.image" alt="A description of the image." loading="lazy"
+          class="    ratio     ratio-4x3        img-fluid object-fit-cover rounded-top-3   object-fit-cover        border-0 p-2" decoding="async">
+      </div>
+      <div class="col-md-7">
+        <div class="card-body ">
+          <h5 class="card-title"> product-ditals </h5>
+          <h2>{{ product.title }}</h2>
+          <p>{{ product.description }}</p>
+
+
+          <h4 class="text-success "><strong>Price:</strong> {{ product.price | currency }}</h4>
+          <button class="btn  btn-outline-success fw-medium" (click)="addToCart(product)">Add to Cart</button>
+          <br>
+
+          <button class="btn  btn-outline-success mt-3 fw-medium" (click)="goBack()"> gotBack </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<br>
+<br>
+
+
+
+
+
+
+
+
+
+
+
+<ng-template #loading>
+  <p>Loading product details...</p>
+</ng-template>
+
+<ng-template #errorTemplate>
+  <p>Error loading product details. Please try again later.</p>
+</ng-template>
+<br>
+<br>
+<br>

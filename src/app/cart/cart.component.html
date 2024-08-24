@@ -1,0 +1,72 @@
+<br>
+<br>
+<div class="container mt-5">
+  <div class="card  rounded-3  mx-sm-5 ">
+    <div class="row g-0 mx-sm-2">
+
+
+
+
+
+
+
+
+      <div class="cart-container">
+        <h2>Your Cart</h2>
+
+        <div *ngIf="items.length === 0">
+          <p>Your cart is empty.</p>
+        </div>
+
+        <div *ngIf="items.length > 0" class="table-responsive">
+          <table class="table align-middle">
+            <thead>
+              <tr class="fs-5 text-primary">
+                <th class="fs-5 text-primary">Product img</th>
+                <th class="fs-5 text-primary">Price</th>
+                <th class="fs-5 text-primary">title</th>
+                <th class="fs-5 text-primary">Total</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let item of items">
+                <td class="fs-6 text-warning" style="width: 30%;">
+                  <img src="{{ item.image}}" class="img-fluid rounded-start  ratio ratio-16x9  object-fit-cover"
+                    alt="{{ item.title }}">
+                </td>
+                <td class="fs-6 text-info">{{ item.price | currency }}</td>
+                <td>{{ item.title}}</td>
+                <td>{{ item.price * item.quantity | currency }}</td>
+              </tr>
+              <tr class="align-bottom">
+                <td colspan="3"><strong>Grand Total:</strong></td>
+                <td class="text-warning"><strong>{{ getTotal() | currency }}</strong></td>
+              </tr>
+              <tr>
+                <td colspan="2"></td>
+                <td class="align-top">This cell is aligned to the top.</td>
+                <td></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <form [formGroup]="checkoutForm" (ngSubmit)="onSubmit()" class="checkout-form form-control">
+          <div>
+            <label for="name">Name</label>
+            <input id="name" type="text" formControlName="name" class="checkout-form form-control" required />
+          </div>
+
+          <div>
+            <label for="address">Address</label>
+            <input id="address" type="text" formControlName="address" class="checkout-form form-control" required />
+          </div>
+
+          <button type="submit" class="btn btn-primary btn-lg w-50"   (click)="clearCart()" [disabled]="checkoutForm.invalid">Submit
+            Order</button>
+        </form>
+      </div>
+
+    </div>
+  </div>
+</div>
